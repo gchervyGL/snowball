@@ -1,0 +1,15 @@
+FROM golang:1.10 AS builder
+ENV GOPATH /go
+ADD . /go/src/github.com/iandri/snowball
+WORKDIR /go/src/github.com/iandri/snowball
+# RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o snowball .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o snowball .
+# COPY /go/src/github.com/iandri/snowball/snowball ./
+
+# FROM alpine:latest
+# ENV HTTP_PROXY http://10.61.9.74:3128/
+# RUN apk --no-cache add ca-certificates
+# WORKDIR /root/
+# COPY --from=builder /go/src/github.com/iandri/snowball/sbowball .
+# CMD ["./snowball"]
+
